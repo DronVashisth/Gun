@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gun Firing Animation</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2c3e50;
+      overflow: hidden;
+    }
+
+    .gun {
+      position: relative;
+      width: 150px;
+      height: 50px;
+      background-color: black;
+      border-radius: 5px;
+    }
+
+    .barrel {
+      position: absolute;
+      width: 100px;
+      height: 20px;
+      top: 15px;
+      left: 150px;
+      background-color: black;
+      border-radius: 5px;
+    }
+
+    .bullet {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: 20px;
+      left: 240px;
+      background-color: red;
+      border-radius: 50%;
+      display: none;
+    }
+
+    @keyframes fireBullet {
+      0% {
+        transform: translateX(19);
+      }
+      50% {
+        transform: translateX(800px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gun">
+    <div class="barrel"></div>
+    <div class="bullet" id="bullet"></div>
+  </div>
+
+  <script>
+    // Function to fire the bullet
+    function fireBullet() {
+      const bullet = document.getElementById('bullet');
+      bullet.style.display = 'block';
+      bullet.style.animation = 'fireBullet 1s linear';
+
+      // Reset bullet after animation ends
+      bullet.addEventListener('animationend', () => {
+        bullet.style.display = 'none';
+        bullet.style.animation = '';
+      });
+    }
+
+  
+    window.addEventListener('keydown', (event) => {
+      if (event.code === 'Space') {
+        fireBullet();
+      }
+    });
+  </script>
+</body>
+</html>
